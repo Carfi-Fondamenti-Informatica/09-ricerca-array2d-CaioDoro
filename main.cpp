@@ -1,26 +1,36 @@
 #include <iostream>
 using namespace std;
+bool posizione(char array1[10][20], char array2[20], int&numero){
+    for(int i=0; i<10; i++){
+        for(int k=0; k<20; k++){
+            if(array2[k] != array1[i][k]){
+                k=20;
+            }else if(k==19){
+                numero=i;
+                return true;
+            }
+        }
+    }return false;
+}
 
-bool match(const char *ptr1, const char* ptr2);
-
-int main (){
-    char N[10][20];
-    char C;
-
-
-    for (int i=0; i<10; i++) {
-        cin >> N[i];
+int main() {
+    char array1[10][20];
+    char array2[20];
+    int numero=0;
+    for(int i=0; i<10; i++){
+        for(int k=0; k<20; k++){
+            array1[i][k]=' ';
+            array2[k]=' ';
+        }
     }
-    
-    char M[0][20];
-    cin >> M[0][20];
-    for (int i=0; i<10; i++) {
-        if (match(N[i], M[0])) {
-            cout << i << endl;
-            break;
-        } else
-            cout << "non presente" << endl;
-        break;
+    for(int i=0; i<10; i++){
+        cin >> array1[i];
     }
-
-    return 0;}
+    cin>>array2;
+    if(posizione(array1, array2, numero)){
+        cout << numero;
+    }else{
+        cout << "non presente";
+    }
+    return 0;
+}
